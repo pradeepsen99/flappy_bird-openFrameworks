@@ -1,14 +1,11 @@
 # Project Proposal
-The project I plan to be doing is a visualization of the mtd_bus system.
+For this project I plan to recreate the game FlappyBird using openFrameworks and some external libaries
 
-## What that entails.
-I plan on using the bus data from the mtd databases on current bus information and use that to visualize the bus routes into google maps so a person can visualize routes when they are taking a trip to anywhere on the campus or anywhere using the mtd bus system.
+## What this entails:
+This project will be as close to the original game of FlappyBird as possible. So essentially there will be a bird thats 'flapping' through and the goal of the bird is to dodge the various obstacles that are coming at it. Those obstacles will be pipes that are at random lengths and the bird has to ensure that it doesn't hit any of the pipes. The goal of the game is to survive as long as possible and attain the highest score possible.
 
-## Libraries Ill be using
-In order to visualize my data I need the help of a couple libraries. Listed below are the libraries I plan on using.
+## Libaries I plan on using
+The libaries I plan on using for this project will be the ofxGUI addon for openFrameworks as that contains most of the things I need to do in terms of graphics and the movement of the flappy bird character and the random pipes that will spawn in the game while it is running.
 
-### JSON++
-This library will help me parse through the JSON data given by the mtd api and will help in giving the information for google maps to map out. Link of the github: https://github.com/hjiang/jsonxx
-
-## Background
-I have background in JSON parson, from this class obviously and also from other projects I have been doing in other facets. This should help me in getting the raw data I need. I also have a background in using the mtd api with other projects I have worked with aswell so the data aspect of things should be of no problem to me.
+##Background
+My background is that I have made a flappy bird game before in the language VisualBasic and I was able to sucessfully recreate it. So from that experience I know how the mechanics of the game work and should help me with desiging the game to ensure that mechanically it is accurate and that I wouldn't be held up by any of the mechanics of the game.
