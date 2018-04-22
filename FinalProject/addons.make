@@ -1,4 +1,0 @@
-ofxAwesomiumPlus
-ofxGui
-ofxNetwork
-ofxXmlSettings
