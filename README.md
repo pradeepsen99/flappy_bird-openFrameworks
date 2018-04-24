@@ -1,1 +1,2 @@
-# CS 126 FinalProject
+# flappy_bird-openFrameworks
+
