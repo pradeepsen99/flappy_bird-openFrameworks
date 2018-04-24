@@ -14,10 +14,18 @@ class bird{
 private:
     //speed var, influenced by gravity
     int speed = 0;
+    const int max_speed = 200;
     
     //x, y variables that are the position.
-    int xCor;
-    int yCor;
+    int x_cor;
+    int y_cor;
+    
+    //Height and width of the screen.
+    int height;
+    int width;
+    
+    //Boundary checks.
+    bool edge_cancel = true;
     
     //Changes the x coordinate of the bird.
     void changeX(int value);
@@ -31,7 +39,7 @@ public:
     int getYCor();
     
     //The constructor.
-    void birdSetup(int x, int y);
+    void birdSetup(int x, int y, int h, int w);
     
     //Moving the bird variables.
     void fly(int strength);

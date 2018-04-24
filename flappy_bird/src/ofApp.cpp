@@ -6,19 +6,19 @@ void ofApp::setup(){
         pipes_vector.push_back(*new pipes);
     }
     
-    
     ofSetWindowTitle("Flappy Bird");
-    flappy.birdSetup(400, 400);
+    flappy.birdSetup(400, 400, ofGetWidth(), ofGetHeight());
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    flappy.gravity(2);
+    flappy.gravity(gravity_value);
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     drawBird();
+    frame_counter++;
 }
 
 //--------------------------------------------------------------
@@ -30,7 +30,7 @@ void ofApp::keyPressed(int key){
     
     int upper_key = toupper(key);
     if(upper_key == ' '){
-        flappy.fly(20);
+        flappy.fly(speed);
     }
     
 }
@@ -51,5 +51,5 @@ void ofApp::drawPipes(){
 
 void ofApp::drawBird(){
     ofSetColor(ofColor(50, 100, 50));
-    ofDrawRectangle(flappy.getYCor(), flappy.getXCor(), 25, 25);
+    ofDrawRectangle(flappy.getXCor(), flappy.getYCor(), 25, 25);
 }

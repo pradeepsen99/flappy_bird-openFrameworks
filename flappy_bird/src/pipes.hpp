@@ -9,13 +9,23 @@
 #define pipes_hpp
 
 #include <stdio.h>
+#include "ofMain.h"
 
 class pipes{
     
 private:
+    int x_cor;
     
+    int top_pipe_y;
+    int bottom_pipe_y;
     
-
+    const int gap_size=0;
+    
+public:
+    void pipeSetup(int h, int w, int x);
+    
+    void setup();
+    int getYCor();
     
 };
 

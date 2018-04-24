@@ -13,18 +13,23 @@ class ofApp : public ofBaseApp{
     };
     
 private:
-    bird flappy;
+    //Testing variables
+    int frame_counter = 0;
     
+    //GameState
     GameState current_state = IN_PROGRESS;
     
-    int gravity_value = 0;
-    int speed = 5;
-    int wall_moveSpeed = 5;
+    //Constants
+    const int gravity_value = 2;
+    const int speed = 29;
+    const int wall_moveSpeed = 5;
     
     //Functions
     void drawBird();
     void drawPipes();
     
+    //Game Objects
+    bird flappy;
     std::vector<pipes> pipes_vector;
     
 public:
