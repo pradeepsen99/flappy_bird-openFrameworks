@@ -7,6 +7,9 @@
 
 #include "bird.hpp"
 
+void bird::changeX(int x){
+    xCor += x;
+}
 
 void bird::birdSetup(int x, int y){
     bird::xCor = x;
@@ -14,12 +17,20 @@ void bird::birdSetup(int x, int y){
 }
 
 void bird::fly(int strength){
-    changeX(strength);
+    speed = -1*strength;
+    //changeX(strength * -1);
     //TODO Add animations here.
 }
 
 void bird::gravity(int power){
-    changeX(power);
+    speed += power;
+    changeX(speed);
 }
 
+int bird::getXCor(){
+    return xCor;
+}
 
+int bird::getYCor(){
+    return yCor;
+}

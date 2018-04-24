@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "bird.hpp"
+#include "pipes.hpp"
 
 class ofApp : public ofBaseApp{
     
@@ -14,7 +15,7 @@ class ofApp : public ofBaseApp{
 private:
     bird flappy;
     
-    GameState currentState = IN_PROGRESS;
+    GameState current_state = IN_PROGRESS;
     
     int gravity_value = 0;
     int speed = 5;
@@ -22,11 +23,11 @@ private:
     
     //Functions
     void drawBird();
-    void pipes();
+    void drawPipes();
+    
+    std::vector<pipes> pipes_vector;
     
 public:
-    
-    
     
     void setup();
     void update();

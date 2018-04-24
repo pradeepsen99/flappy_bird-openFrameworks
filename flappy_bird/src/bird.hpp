@@ -12,6 +12,12 @@
 
 class bird{
 private:
+    //speed var, influenced by gravity
+    int speed = 0;
+    
+    //x, y variables that are the position.
+    int xCor;
+    int yCor;
     
     //Changes the x coordinate of the bird.
     void changeX(int value);
@@ -20,9 +26,9 @@ private:
     void changeY(int value);
     
 public:
-    //x, y variables that are the position.
-    int xCor;
-    int yCor;
+    //Getter
+    int getXCor();
+    int getYCor();
     
     //The constructor.
     void birdSetup(int x, int y);
