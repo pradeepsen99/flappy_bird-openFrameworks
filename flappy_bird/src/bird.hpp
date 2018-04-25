@@ -14,18 +14,16 @@ class bird{
 private:
     //speed var, influenced by gravity
     int speed = 0;
-    const int max_speed = 200;
+    const int max_speed = 50;
     
     //x, y variables that are the position.
     int x_cor;
     int y_cor;
+    const int height_buffer = 300;
     
     //Height and width of the screen.
     int height;
     int width;
-    
-    //Boundary checks.
-    bool edge_cancel = true;
     
     //Changes the x coordinate of the bird.
     void changeX(int value);

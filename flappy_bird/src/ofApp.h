@@ -13,9 +13,10 @@ class ofApp : public ofBaseApp{
     };
     
 private:
-    //Testing variables
-    int frame_counter = 0;
+    //Background
+    ofImage background;
     
+
     //GameState
     GameState current_state = IN_PROGRESS;
     
@@ -30,6 +31,7 @@ private:
     
     //Game Objects
     bird flappy;
+    ofImage flappy_picture;
     std::vector<pipes> pipes_vector;
     
 public:

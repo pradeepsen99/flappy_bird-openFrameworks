@@ -25,19 +25,22 @@ void bird::fly(int strength){
 }
 
 void bird::gravity(int power){
-    //if(speed > 200){
-        if(!(y_cor < 0 || y_cor > (height-300))){
-            speed += power;
-            changeY(speed);
-            edge_cancel = true;
-        }else if (y_cor < 0){
-            y_cor = height-300;
-            //speed = 0;
-        }else if (y_cor > (height - 300)){
-            y_cor = 0;
-            //speed = 0;
-        }
-    //}
+    
+    if(!(y_cor < 0 || y_cor > (height+height_buffer))){
+        speed += power;
+        changeY(speed);
+    }else if (y_cor < 0){
+        y_cor = height+height_buffer;
+        //speed = 0;
+    }else if (y_cor > (height+height_buffer)){
+        y_cor = 0;
+        //speed = 0;
+    }
+    
+    if(speed > max_speed){
+        speed = max_speed;
+    }
+    
 }
 
 int bird::getXCor(){

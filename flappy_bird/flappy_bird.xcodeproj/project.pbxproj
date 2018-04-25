@@ -59,6 +59,7 @@
 		6A458F6F208E648D00D5BBD6 /* bird.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = bird.hpp; sourceTree = "<group>"; };
 		6A458F72208F0B4B00D5BBD6 /* pipes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pipes.cpp; sourceTree = "<group>"; };
 		6A458F73208F0B4B00D5BBD6 /* pipes.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pipes.hpp; sourceTree = "<group>"; };
+		6A458F75208FE38A00D5BBD6 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		6E6D9269166A05F2717FFDE0 /* ofxGuiGroup.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxGuiGroup.h; path = ../../../../of_v0.9.8_osx_release/addons/ofxGui/src/ofxGuiGroup.h; sourceTree = SOURCE_ROOT; };
 		755C41CA8B80B216B4A7A201 /* ofxPanel.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxPanel.h; path = ../../../../of_v0.9.8_osx_release/addons/ofxGui/src/ofxPanel.h; sourceTree = SOURCE_ROOT; };
 		8F276A16D0D6C287D0526E3D /* ofxBaseGui.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxBaseGui.cpp; path = ../../../../of_v0.9.8_osx_release/addons/ofxGui/src/ofxBaseGui.cpp; sourceTree = SOURCE_ROOT; };
@@ -166,6 +167,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				6A458F75208FE38A00D5BBD6 /* assets */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
