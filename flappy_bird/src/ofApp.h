@@ -25,6 +25,9 @@ private:
     const int speed = 29;
     const int wall_moveSpeed = 5;
     
+    //Counters
+    int number_of_pipes = 1;
+    
     //Functions
     void drawBird();
     void drawPipes();
@@ -32,7 +35,9 @@ private:
     //Game Objects
     bird flappy;
     ofImage flappy_picture;
+    
     std::vector<pipes> pipes_vector;
+    std::vector<std::vector<ofImage>> pipes_images;
     
 public:
     

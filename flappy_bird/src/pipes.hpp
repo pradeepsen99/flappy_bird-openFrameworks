@@ -19,15 +19,22 @@ private:
     int top_pipe_y;
     int bottom_pipe_y;
     
+    int height;
+    int width;
+    
     const int gap_size=200;
+    
+    int randNum(int min, int max);
     
 public:
     void pipeSetup(int h, int w, int x);
-    
     void setup();
-    int getYCor();
     void movePipe(int move_speed);
-    void drawPipe();
+    
+    
+    int getYCor();
+    int getTopPipe();
+    int getBottomPipe();
     
 };
 

@@ -26,13 +26,13 @@ void bird::fly(int strength){
 
 void bird::gravity(int power){
     
-    if(!(y_cor < 0 || y_cor > (height+height_buffer))){
+    if(!(y_cor < 0 || y_cor > (height))){
         speed += power;
         changeY(speed);
     }else if (y_cor < 0){
-        y_cor = height+height_buffer;
+        y_cor = height;
         //speed = 0;
-    }else if (y_cor > (height+height_buffer)){
+    }else if (y_cor > (height)){
         y_cor = 0;
         //speed = 0;
     }
