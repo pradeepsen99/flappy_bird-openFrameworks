@@ -22,7 +22,7 @@ private:
     int height;
     int width;
     
-    const int gap_size=200;
+    const int gap_size=300;
     
     int randNum(int min, int max);
     
@@ -32,7 +32,7 @@ public:
     void movePipe(int move_speed);
     
     
-    int getYCor();
+    int getXCor();
     int getTopPipe();
     int getBottomPipe();
     

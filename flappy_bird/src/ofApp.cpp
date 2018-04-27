@@ -13,6 +13,7 @@ void ofApp::setup(){
         pipes_vector.push_back(*new pipes);
         pipes_vector[i].pipeSetup(ofGetHeight(), ofGetWidth(), ofGetWidth());
         
+        pipes_images.push_back(*new std::vector<ofImage>);
         for(int j = 0; j < 2; j++){
             ofImage pipeImg;
             pipeImg.loadImage("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/pipe-green.png");
@@ -23,56 +24,62 @@ void ofApp::setup(){
         flappy.birdSetup(ofGetWidth()/2, ofGetHeight()/2, ofGetHeight(), ofGetWidth());
     }
 }
-    
-    //--------------------------------------------------------------
-    void ofApp::update(){
-        flappy.gravity(gravity_value);
+
+//--------------------------------------------------------------
+void ofApp::update(){
+    flappy.gravity(gravity_value);
+    for(int i = 0; i < number_of_pipes; i++){
+        pipes_vector[i].movePipe(wall_moveSpeed);
+    }
+}
+
+//--------------------------------------------------------------
+void ofApp::draw(){
+    background.draw(0, 0, ofGetWidth(), ofGetHeight());
+    drawBird();
+    drawPipes();
+    for(int i = 0; i < 3; i++){
+        //pipes_vector[i].drawPipe();
+    }
+    string message = "fps: "+ofToString(ofGetFrameRate());
+    ofDrawBitmapString(message, 10, 20);
+}
+
+//--------------------------------------------------------------
+void ofApp::keyPressed(int key){
+    if (key == OF_KEY_F12) {
+        ofToggleFullscreen();
+        return;
     }
     
-    //--------------------------------------------------------------
-    void ofApp::draw(){
-        background.draw(0, 0, ofGetWidth(), ofGetHeight());
-        drawBird();
-        for(int i = 0; i < 3; i++){
-            //pipes_vector[i].drawPipe();
-        }
-        string message = "fps: "+ofToString(ofGetFrameRate());
-        ofDrawBitmapString(message, 10, 20);
+    int upper_key = toupper(key);
+    if(upper_key == ' '){
+        flappy.fly(speed);
     }
     
-    //--------------------------------------------------------------
-    void ofApp::keyPressed(int key){
-        if (key == OF_KEY_F12) {
-            ofToggleFullscreen();
-            return;
-        }
-        
-        int upper_key = toupper(key);
-        if(upper_key == ' '){
-            flappy.fly(speed);
-        }
-        
-    }
-    
-    //--------------------------------------------------------------
-    void ofApp::keyReleased(int key){
-        
-    }
-    
-    //--------------------------------------------------------------
-    void ofApp::mouseMoved(int x, int y ){
-        
-    }
-    
-    void ofApp::drawPipes(){
-        for(int i = 0; i < number_of_pipes; i++){
+}
+
+void ofApp::drawPipes(){
+    for(int i = 0; i < number_of_pipes; i++){
+        for(int j = 0; j < 2; j++){
+            if(j==0){
+                //                    ofPushMatrix();
+                //                    ofTranslate(50/2, pipes_vector[i].getTopPipe()/2, 0);
+                //                    ofRotate(180);
+                pipes_images[i].at(j).draw(pipes_vector[i].getXCor(), 0, 50, pipes_vector[i].getTopPipe());
+                //                    ofPopMatrix();
+                //                    ofTranslate(0,0);
+            }else if(j==1){
+                pipes_images[i].at(j).draw(pipes_vector[i].getXCor(), (ofGetHeight()-(ofGetHeight()/4)), 50, pipes_vector[i].getBottomPipe());
+            }
             
         }
     }
+}
+
+void ofApp::drawBird(){
+    //ofSetColor(ofColor(50, 100, 50));
+    //ofDrawRectangle(flappy.getXCor(), flappy.getYCor(), 25, 25);
+    flappy_picture.draw(flappy.getXCor(), flappy.getYCor(), 50,50);
     
-    void ofApp::drawBird(){
-        //ofSetColor(ofColor(50, 100, 50));
-        //ofDrawRectangle(flappy.getXCor(), flappy.getYCor(), 25, 25);
-        flappy_picture.draw(flappy.getXCor(), flappy.getYCor(), 50,50);
-        
-    }
+}
