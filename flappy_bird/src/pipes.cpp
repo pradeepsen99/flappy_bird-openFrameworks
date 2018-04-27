@@ -15,7 +15,7 @@ void pipes::pipeSetup(int h, int w, int x){
     //Sets up the pipe structure.
     srand(time(NULL));
     int halfway_point = (h/2);
-    top_pipe_y = randNum(1, halfway_point-gap_size);
+    top_pipe_y = randNum(1, halfway_point-100);
     bottom_pipe_y = top_pipe_y + gap_size;
     
 }
