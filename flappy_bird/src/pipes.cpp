@@ -24,6 +24,7 @@ void pipes::movePipe(int move_speed){
     x_cor -= move_speed;
     if(x_cor < 0){
         x_cor = width;
+        //delete this;
     }
 }
 

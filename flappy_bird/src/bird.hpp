@@ -33,6 +33,7 @@ private:
     
 public:
     //Getter
+    
     int getXCor();
     int getYCor();
     

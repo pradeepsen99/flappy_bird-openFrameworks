@@ -25,9 +25,11 @@ private:
     const int gravity_value = 2;
     const int speed = 29;
     const int wall_moveSpeed = 5;
+    const int spawn_time = 30;
     
     //Counters
     int number_of_pipes = 1;
+    int spawn_timer = 0;
     
     //Functions
     void drawBird();

@@ -31,6 +31,21 @@ void ofApp::update(){
     for(int i = 0; i < number_of_pipes; i++){
         pipes_vector[i].movePipe(wall_moveSpeed);
     }
+    spawn_timer++;
+    if(spawn_timer == spawn_time){
+        pipes_vector.push_back(*new pipes);
+        
+        std::vector<ofImage> current_image;
+        for(int j = 0; j < 2; j++){
+            ofImage pipeImg;
+            pipeImg.loadImage("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/pipe-green.png");
+            current_image.push_back(pipeImg);
+        }
+        pipes_images.push_back(current_image);
+        number_of_pipes++;
+        spawn_timer = 0;
+        
+    }
 }
 
 //--------------------------------------------------------------
@@ -38,10 +53,9 @@ void ofApp::draw(){
     background.draw(0, 0, ofGetWidth(), ofGetHeight());
     drawBird();
     drawPipes();
-    for(int i = 0; i < 3; i++){
-        //pipes_vector[i].drawPipe();
-    }
-    string message = "fps: "+ofToString(ofGetFrameRate());
+
+    //FPS Counter.
+    string message = "fps: "+ofToString(ofGetFrameRate()) + " NumberOfPipes " + ofToString(pipes_vector.size());
     ofDrawBitmapString(message, 10, 20);
 }
 
@@ -59,6 +73,7 @@ void ofApp::keyPressed(int key){
     
 }
 
+//--------------------------------------------------------------
 void ofApp::drawPipes(){
     for(int i = 0; i < number_of_pipes; i++){
         for(int j = 0; j < 2; j++){
@@ -77,6 +92,7 @@ void ofApp::drawPipes(){
     }
 }
 
+//--------------------------------------------------------------
 void ofApp::drawBird(){
     //ofSetColor(ofColor(50, 100, 50));
     //ofDrawRectangle(flappy.getXCor(), flappy.getYCor(), 25, 25);
