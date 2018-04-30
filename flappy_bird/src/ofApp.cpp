@@ -7,8 +7,6 @@ void ofApp::setup(){
     background.loadImage("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/background-day.png");
     flappy_picture.loadImage("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/yellowbird-downflap.png");
     
-    
-    
     for(int i = 0; i < number_of_pipes; i++){
         pipes_vector.push_back(*new pipes);
         pipes_vector[i].pipeSetup(ofGetHeight(), ofGetWidth(), ofGetWidth());
@@ -17,7 +15,7 @@ void ofApp::setup(){
         for(int j = 0; j < 2; j++){
             ofImage pipeImg;
             pipeImg.loadImage("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/pipe-green.png");
-            pipes_images[i].push_back(pipeImg);
+            //pipes_images[i].push_back(pipeImg);
         }
         
         ofSetWindowTitle("Flappy Bird");
@@ -78,12 +76,7 @@ void ofApp::drawPipes(){
     for(int i = 0; i < number_of_pipes; i++){
         for(int j = 0; j < 2; j++){
             if(j==0){
-                //                    ofPushMatrix();
-                //                    ofTranslate(50/2, pipes_vector[i].getTopPipe()/2, 0);
-                //                    ofRotate(180);
                 pipes_images[i].at(j).draw(pipes_vector[i].getXCor(), 0, 50, pipes_vector[i].getTopPipe());
-                //                    ofPopMatrix();
-                //                    ofTranslate(0,0);
             }else if(j==1){
                 pipes_images[i].at(j).draw(pipes_vector[i].getXCor(), (ofGetHeight()-(ofGetHeight()/4)), 50, pipes_vector[i].getBottomPipe());
             }
