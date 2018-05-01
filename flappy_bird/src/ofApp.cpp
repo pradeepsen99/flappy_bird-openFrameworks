@@ -15,7 +15,7 @@ void ofApp::setup(){
         for(int j = 0; j < 2; j++){
             ofImage pipeImg;
             pipeImg.loadImage("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/pipe-green.png");
-            //pipes_images[i].push_back(pipeImg);
+            pipes_images[i].push_back(pipeImg);
         }
         
         ofSetWindowTitle("Flappy Bird");
@@ -31,7 +31,9 @@ void ofApp::update(){
     }
     spawn_timer++;
     if(spawn_timer == spawn_time){
+        
         pipes_vector.push_back(*new pipes);
+        pipes_vector[number_of_pipes].pipeSetup(ofGetHeight(), ofGetWidth(), ofGetWidth());
         
         std::vector<ofImage> current_image;
         for(int j = 0; j < 2; j++){
@@ -74,7 +76,12 @@ void ofApp::keyPressed(int key){
 //--------------------------------------------------------------
 void ofApp::drawPipes(){
     for(int i = 0; i < number_of_pipes; i++){
+        if(pipes_vector[i].getXCor() < 0){
+            pipes_vector.erase(pipes_vector.begin() + i);
+            number_of_pipes--;
+        }
         for(int j = 0; j < 2; j++){
+            
             if(j==0){
                 pipes_images[i].at(j).draw(pipes_vector[i].getXCor(), 0, 50, pipes_vector[i].getTopPipe());
             }else if(j==1){
@@ -92,3 +99,4 @@ void ofApp::drawBird(){
     flappy_picture.draw(flappy.getXCor(), flappy.getYCor(), 50,50);
     
 }
+
