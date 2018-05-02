@@ -17,6 +17,7 @@ class pipes{
 private:
     int x_cor;
     
+    //Coordinates of pipes.
     int top_pipe_y;
     int bottom_pipe_y;
     
@@ -32,7 +33,7 @@ public:
     void setup();
     void movePipe(int move_speed);
     
-    
+    //Getters
     int getXCor();
     int getTopPipe();
     int getBottomPipe();

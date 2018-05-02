@@ -2,6 +2,12 @@
 
 This is a recreation of the game Flappy Bird using openFrameworks and coded in c++.
 
+## How to play
+The game is a simple flappy bird simulation. The controls are as follows.
+- `Space` = Makes the bird 'flap'
+- `R` = Restarts the game after you die
+- `Q` = Changes the color of the bird you are currently playing.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.

@@ -51,10 +51,15 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     if(current_state == IN_PROGRESS){
+        //Adds the gravity element into the game.
         flappy.gravity(gravity_value);
+        
+        //Moves the wall a certain amount to the left. Increasing value makes it goes faster.
         for(int i = 0; i < pipes_vector.size(); i++){
             pipes_vector[i].movePipe(wall_moveSpeed);
         }
+        
+        //Every time spawn timer reaches 30, it spawns a new pipe.
         spawn_timer++;
         if(spawn_timer == spawn_time){
             
@@ -73,7 +78,7 @@ void ofApp::update(){
             
         }
         
-        
+        //Animations that are based off of the speed of the bird.
         if(flappy.getSpeed() > 0){
             flappy_picture.loadImage(ofToString("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/") + typeOfBird+ "-upflap.png");
         }else if(flappy.getSpeed()<0){
@@ -91,8 +96,9 @@ void ofApp::draw(){
     drawBird();
     drawPipes();
     
+    
     if(current_state == FINISHED){
-        ofDrawBitmapString("YOU LOST", 258, 384);
+        ofDrawBitmapString("PRESS SPACE TO START", 258, 384);
     }else if(current_state == PAUSED){
         ofDrawBitmapString("GAME IS PAUSED\nHIGHSCORE: " + ofToString(highscore), 258, 384);
     }
@@ -104,11 +110,8 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    if (key == OF_KEY_F12) {
-        ofToggleFullscreen();
-        return;
-    }
     int upper_key = toupper(key);
+    //Q changes the color of the birds
     if(upper_key == 'Q'){
         if(typeOfBird == "yellowbird"){
             typeOfBird = "redbird";
@@ -119,9 +122,11 @@ void ofApp::keyPressed(int key){
     
     if(upper_key == ' '){
         flappy.fly(speed);
+        //This starts the game
         if(current_state == PAUSED){
             current_state = IN_PROGRESS;
         }
+        //Makes the flapping noises
         mySound.play();
     }else if(upper_key == 'R' && current_state == FINISHED){
         resetVars();
@@ -141,6 +146,7 @@ void ofApp::drawPipes(){
             wall_moveSpeed = 0;
             current_state = FINISHED;
         }
+        //Rendering pipes
         for(int j = 0; j < 2; j++){
             if(j==0){
                 pipes_images[i].at(j).draw(pipes_vector[i].getXCor(), 0, 50, pipes_vector[i].getTopPipe());
@@ -154,10 +160,7 @@ void ofApp::drawPipes(){
 
 //--------------------------------------------------------------
 void ofApp::drawBird(){
-    //ofSetColor(ofColor(50, 100, 50));
-    //ofDrawRectangle(flappy.getXCor(), flappy.getYCor(), 25, 25);
     flappy_picture.draw(flappy.getXCor(), flappy.getYCor(), 50,50);
-    
 }
 
 

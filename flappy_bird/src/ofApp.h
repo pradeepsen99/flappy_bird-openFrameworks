@@ -16,6 +16,7 @@ class ofApp : public ofBaseApp{
 private:
     ofSoundPlayer   mySound;
     
+    //Highscore
     int highscore = 0;
     
     //Background
@@ -27,7 +28,6 @@ private:
     //Constants
     const int gravity_value = 2;
     const int speed = 29;
-    
     const int spawn_time = 50;
     
     //Counters
@@ -46,15 +46,16 @@ private:
     ofImage flappy_picture;
     string typeOfBird = "yellowbird";
     
+    //Vectos.
     std::vector<pipes> pipes_vector;
     std::vector<std::vector<ofImage>> pipes_images;
     
-
+    
 public:
     
     void setup();
     void update();
     void draw();
     void keyPressed(int key);
-
+    
 };

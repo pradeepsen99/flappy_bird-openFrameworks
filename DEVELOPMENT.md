@@ -32,3 +32,6 @@ Today I finally fixed the pipe spawning issue. Turns out I was using the wrong c
 
 ## May 1, 2018
 Today I worked on getting the collision detection. So I brainstormed over this idea and the best solution that came to mind was to find the y space between the both pipes and when I did an if statemnt that constricted the bounds of the bird being travelled to the x location of the current pipe and the y location of the pipe. It worked. Now the game has collision detection which is really nice. The only things left is the pause menu and the death screen and I should be done.
+
+## May 2, 2018
+Today I worked on getting the sounds incorporated and the animations all sorted out. I was able to get the animations done easily by simply setting the bird animation to vary on the speed of the bird. I also got the sound to work by having the sound pay everytime the space bar was pressed. This added the sound of the bird flapping.
