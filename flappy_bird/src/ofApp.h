@@ -19,7 +19,7 @@ private:
     
 
     //GameState
-    GameState current_state = IN_PROGRESS;
+    GameState current_state = PAUSED;
     
     //Constants
     const int gravity_value = 2;
@@ -48,8 +48,10 @@ public:
     void setup();
     void update();
     void draw();
-    
     void keyPressed(int key);
+    
+    void resetVars();
+    void addInitialPole();
     
     void removeTop();
 

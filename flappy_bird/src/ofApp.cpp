@@ -1,15 +1,19 @@
 #include "ofApp.h"
 
-//--------------------------------------------------------------
-void ofApp::setup(){
-    
-    
+void ofApp::resetVars(){
     //Resetting Variables
     pipes_vector.clear();
     pipes_images.clear();
     number_of_pipes == 1;
     current_state = IN_PROGRESS;
     wall_moveSpeed = 5;
+    
+    
+}
+
+//--------------------------------------------------------------
+void ofApp::setup(){
+    
     
     //BACKGROUND stuff.
     ofSetBackgroundAuto(true);
@@ -40,45 +44,40 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    if(current_state == IN_PROGRESS){
-        flappy.gravity(gravity_value);
-        for(int i = 0; i < number_of_pipes; i++){
-            pipes_vector[i].movePipe(wall_moveSpeed);
-        }
-        spawn_timer++;
-        if(spawn_timer == spawn_time){
-            
-            pipes_vector.push_back(*new pipes);
-            pipes_vector[number_of_pipes].pipeSetup(ofGetHeight(), ofGetWidth(), ofGetWidth());
-            
-            std::vector<ofImage> current_image;
-            for(int j = 0; j < 2; j++){
-                ofImage pipeImg;
-                pipeImg.loadImage("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/pipe-green.png");
-                current_image.push_back(pipeImg);
-            }
-            pipes_images.push_back(current_image);
-            number_of_pipes++;
-            spawn_timer = 0;
-            
-        }
+    if(current_state == FINISHED){
+        //setup();
     }
-    
+    flappy.gravity(gravity_value);
+    for(int i = 0; i < number_of_pipes; i++){
+        pipes_vector[i].movePipe(wall_moveSpeed);
+    }
+    spawn_timer++;
+    if(spawn_timer == spawn_time){
+        
+        pipes_vector.push_back(*new pipes);
+        pipes_vector[number_of_pipes].pipeSetup(ofGetHeight(), ofGetWidth(), ofGetWidth());
+        
+        std::vector<ofImage> current_image;
+        for(int j = 0; j < 2; j++){
+            ofImage pipeImg;
+            pipeImg.loadImage("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/pipe-green.png");
+            current_image.push_back(pipeImg);
+        }
+        pipes_images.push_back(current_image);
+        number_of_pipes++;
+        spawn_timer = 0;
+        
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    
-    if(current_state == IN_PROGRESS){
-        drawBird();
-        drawPipes();
-    }
-    
     background.draw(0, 0, ofGetWidth(), ofGetHeight());
-
+    drawBird();
+    drawPipes();
     
     if(current_state == FINISHED){
-        ofDrawBitmapString("YOU LOST \n YOU'R SCORE: " + ofToString(pipes_vector.size()) , 258, 384);
+        ofDrawBitmapString("YOU LOST", 258, 384);
     }
     
     //FPS Counter.
@@ -98,16 +97,18 @@ void ofApp::keyPressed(int key){
         flappy.fly(speed);
     }else if(upper_key == 'R' && current_state == FINISHED){
         setup();
-    }else if(upper_key == ' ' && current_state == PAUSED){
-        current_state == IN_PROGRESS;
     }
     
 }
 
 //--------------------------------------------------------------
 void ofApp::drawPipes(){
-    
     for(int i = 0; i < pipes_vector.size(); i++){
+        if(pipes_vector[i].getXCor() < 0){
+            //pipes_vector.pop_back();
+            //number_of_pipes--;
+            //removeTop();
+        }
         //Collision detection
         if(flappy.isDead(pipes_vector[i].getTopPipe(), pipes_vector[i].getBottomPipe(), pipes_vector[i].getGapSize(), pipes_vector[i].getXCor())){
             wall_moveSpeed = 0;
@@ -126,7 +127,10 @@ void ofApp::drawPipes(){
 
 //--------------------------------------------------------------
 void ofApp::drawBird(){
+    //ofSetColor(ofColor(50, 100, 50));
+    //ofDrawRectangle(flappy.getXCor(), flappy.getYCor(), 25, 25);
     flappy_picture.draw(flappy.getXCor(), flappy.getYCor(), 50,50);
+    
 }
 
 void ofApp::removeTop(){
