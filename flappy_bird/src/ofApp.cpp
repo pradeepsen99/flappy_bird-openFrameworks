@@ -53,9 +53,9 @@ void ofApp::draw(){
     background.draw(0, 0, ofGetWidth(), ofGetHeight());
     drawBird();
     drawPipes();
-
+    
     //FPS Counter.
-    string message = "fps: "+ofToString(ofGetFrameRate()) + " NumberOfPipes " + ofToString(pipes_vector.size());
+    string message = "fps: "+ofToString(ofGetFrameRate()) + " Score " + ofToString(pipes_vector.size());
     ofDrawBitmapString(message, 10, 20);
 }
 
@@ -75,17 +75,20 @@ void ofApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ofApp::drawPipes(){
-    for(int i = 0; i < number_of_pipes; i++){
+    for(int i = 0; i < pipes_vector.size(); i++){
         if(pipes_vector[i].getXCor() < 0){
-            pipes_vector.erase(pipes_vector.begin() + i);
-            number_of_pipes--;
+            //pipes_vector.pop_back();
+            //number_of_pipes--;
+            //removeTop();
+        }
+        if(flappy.isDead(pipes_vector[i].getTopPipe(), pipes_vector[i].getBottomPipe(), pipes_vector[i].getGapSize(), pipes_vector[i].getXCor())){
+            wall_moveSpeed = 0;
         }
         for(int j = 0; j < 2; j++){
-            
             if(j==0){
                 pipes_images[i].at(j).draw(pipes_vector[i].getXCor(), 0, 50, pipes_vector[i].getTopPipe());
             }else if(j==1){
-                pipes_images[i].at(j).draw(pipes_vector[i].getXCor(), (ofGetHeight()-(ofGetHeight()/4)), 50, pipes_vector[i].getBottomPipe());
+                pipes_images[i].at(j).draw(pipes_vector[i].getXCor(), pipes_vector[i].getBottomPipe(), 50, 900);
             }
             
         }
@@ -99,4 +102,15 @@ void ofApp::drawBird(){
     flappy_picture.draw(flappy.getXCor(), flappy.getYCor(), 50,50);
     
 }
+
+void ofApp::removeTop(){
+    //pipes_vector.erase(pipes_vector.begin());
+    number_of_pipes--;
+}
+
+
+
+
+
+
 

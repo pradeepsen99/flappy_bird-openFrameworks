@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include "ofMain.h"
 
+
 class pipes{
     
 private:
@@ -35,6 +36,7 @@ public:
     int getXCor();
     int getTopPipe();
     int getBottomPipe();
+    int getGapSize();
     
 };
 

@@ -23,15 +23,15 @@ void pipes::pipeSetup(int h, int w, int x){
 void pipes::movePipe(int move_speed){
     x_cor -= move_speed;
     if(x_cor < 0){
-        x_cor = width;
-        //delete this;
+        //x_cor = width;
     }
 }
 
 //Taken From http://www.cplusplus.com/forum/beginner/183358/
 int pipes::randNum(int min, int max)
 {
-    return rand() % min +  max;
+    srand(time(NULL));
+    return (rand() % max) +  min;
     //return x;
 }
 
@@ -47,5 +47,7 @@ int pipes::getXCor(){
     return x_cor;
 }
 
-
+int pipes::getGapSize(){
+    return gap_size;
+}
 

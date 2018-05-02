@@ -24,10 +24,11 @@ private:
     //Constants
     const int gravity_value = 2;
     const int speed = 29;
-    const int wall_moveSpeed = 5;
-    const int spawn_time = 30;
+    
+    const int spawn_time = 50;
     
     //Counters
+    int wall_moveSpeed = 5;
     int number_of_pipes = 1;
     int spawn_timer = 0;
     

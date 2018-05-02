@@ -18,6 +18,17 @@ void bird::birdSetup(int x, int y, int h, int w){
     width = w;
 }
 
+bool bird::isDead(int top_y, int bottom_y, int gapSize, int pipe_x){
+    if(x_cor >= pipe_x && x_cor <= (pipe_x+50)){
+        if((y_cor < top_y || y_cor >  bottom_y)){
+            return true;
+        }
+    }
+    
+    
+    return false;
+}
+
 void bird::fly(int strength){
     speed = -1 * strength;
     //changeX(strength * -1);

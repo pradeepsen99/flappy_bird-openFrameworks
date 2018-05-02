@@ -33,7 +33,6 @@ private:
     
 public:
     //Getter
-    
     int getXCor();
     int getYCor();
     
@@ -45,6 +44,10 @@ public:
     
     //Gravity
     void gravity(int power);
+    
+    //Dead?
+    bool isDead(int top_y, int bottom_y, int gapSize, int pipe_x);
+    
 };
 
 
