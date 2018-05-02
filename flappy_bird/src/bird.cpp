@@ -61,3 +61,7 @@ int bird::getXCor(){
 int bird::getYCor(){
     return y_cor;
 }
+
+int bird::getSpeed(){
+    return speed;
+}

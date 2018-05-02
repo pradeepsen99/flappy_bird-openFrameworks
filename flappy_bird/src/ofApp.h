@@ -14,10 +14,13 @@ class ofApp : public ofBaseApp{
     };
     
 private:
+    ofSoundPlayer   mySound;
+    
+    int highscore = 0;
+    
     //Background
     ofImage background;
     
-
     //GameState
     GameState current_state = PAUSED;
     
@@ -35,26 +38,23 @@ private:
     //Functions
     void drawBird();
     void drawPipes();
+    void resetVars();
+    void addInitialPole();
     
     //Game Objects
     bird flappy;
     ofImage flappy_picture;
+    string typeOfBird = "yellowbird";
     
     std::vector<pipes> pipes_vector;
     std::vector<std::vector<ofImage>> pipes_images;
     
-    void resetVars();
-    void addInitialPole();
-    
+
 public:
     
     void setup();
     void update();
     void draw();
     void keyPressed(int key);
-    
-
-    
-    void removeTop();
 
 };

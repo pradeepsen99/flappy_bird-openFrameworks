@@ -37,6 +37,7 @@ public:
     int getTopPipe();
     int getBottomPipe();
     int getGapSize();
+
     
 };
 

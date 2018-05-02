@@ -1,5 +1,6 @@
 #include "ofApp.h"
 
+//--------------------------------------------------------------
 void ofApp::resetVars(){
     //Resetting Variables
     pipes_vector.clear();
@@ -13,6 +14,7 @@ void ofApp::resetVars(){
     flappy.birdSetup(ofGetWidth()/2, ofGetHeight()/2, ofGetHeight(), ofGetWidth());
 }
 
+//--------------------------------------------------------------
 void ofApp::addInitialPole(){
     for(int i = 0; i < number_of_pipes; i++){
         pipes_vector.push_back(*new pipes);
@@ -30,7 +32,6 @@ void ofApp::addInitialPole(){
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    
     //BACKGROUND stuff.
     ofSetBackgroundAuto(true);
     background.loadImage("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/background-day.png");
@@ -43,6 +44,7 @@ void ofApp::setup(){
     ofSetWindowTitle("Flappy Bird");
     
     addInitialPole();
+    mySound.load("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/audio/wing.wav");
     
 }
 
@@ -70,6 +72,15 @@ void ofApp::update(){
             spawn_timer = 0;
             
         }
+        
+        
+        if(flappy.getSpeed() > 0){
+            flappy_picture.loadImage(ofToString("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/") + typeOfBird+ "-upflap.png");
+        }else if(flappy.getSpeed()<0){
+            flappy_picture.loadImage(ofToString("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/") + typeOfBird+ "-downflap.png");
+        }else if(flappy.getSpeed() == 0){
+            flappy_picture.loadImage(ofToString("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/") + typeOfBird+ "-midflap.png");
+        }
     }
     
 }
@@ -82,6 +93,8 @@ void ofApp::draw(){
     
     if(current_state == FINISHED){
         ofDrawBitmapString("YOU LOST", 258, 384);
+    }else if(current_state == PAUSED){
+        ofDrawBitmapString("GAME IS PAUSED\nHIGHSCORE: " + ofToString(highscore), 258, 384);
     }
     
     //FPS Counter.
@@ -95,18 +108,24 @@ void ofApp::keyPressed(int key){
         ofToggleFullscreen();
         return;
     }
-    
     int upper_key = toupper(key);
+    if(upper_key == 'Q'){
+        if(typeOfBird == "yellowbird"){
+            typeOfBird = "redbird";
+        }else if(typeOfBird == "redbird"){
+            typeOfBird = "yellowbird";
+        }
+    }
+    
     if(upper_key == ' '){
         flappy.fly(speed);
         if(current_state == PAUSED){
             current_state = IN_PROGRESS;
         }
+        mySound.play();
     }else if(upper_key == 'R' && current_state == FINISHED){
         resetVars();
         addInitialPole();
-    }else if(upper_key == ' '){
-        
     }
     
 }
@@ -114,13 +133,11 @@ void ofApp::keyPressed(int key){
 //--------------------------------------------------------------
 void ofApp::drawPipes(){
     for(int i = 0; i < pipes_vector.size(); i++){
-        if(pipes_vector[i].getXCor() < 0){
-            //pipes_vector.pop_back();
-            //number_of_pipes--;
-            //removeTop();
-        }
         //Collision detection
         if(flappy.isDead(pipes_vector[i].getTopPipe(), pipes_vector[i].getBottomPipe(), pipes_vector[i].getGapSize(), pipes_vector[i].getXCor())){
+            if(highscore < pipes_vector.size()){
+                highscore = pipes_vector.size();
+            }
             wall_moveSpeed = 0;
             current_state = FINISHED;
         }
@@ -142,14 +159,6 @@ void ofApp::drawBird(){
     flappy_picture.draw(flappy.getXCor(), flappy.getYCor(), 50,50);
     
 }
-
-void ofApp::removeTop(){
-    //pipes_vector.erase(pipes_vector.begin());
-    number_of_pipes--;
-}
-
-
-
 
 
 

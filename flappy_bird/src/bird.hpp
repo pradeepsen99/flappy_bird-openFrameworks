@@ -35,6 +35,7 @@ public:
     //Getter
     int getXCor();
     int getYCor();
+    int getSpeed();
     
     //The constructor.
     void birdSetup(int x, int y, int h, int w);
