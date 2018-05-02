@@ -2,10 +2,23 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    
     //BACKGROUND stuff.
     ofSetBackgroundAuto(true);
     background.loadImage("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/background-day.png");
+    
+    //Bird
     flappy_picture.loadImage("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/yellowbird-downflap.png");
+    flappy.birdSetup(ofGetWidth()/2, ofGetHeight()/2, ofGetHeight(), ofGetWidth());
+    
+    //
+    ofSetWindowTitle("Flappy Bird");
+    
+    //Resetting Variables
+    pipes_vector.clear();
+    pipes_images.clear();
+    number_of_pipes == 1;
+    current_state = IN_PROGRESS;
     
     for(int i = 0; i < number_of_pipes; i++){
         pipes_vector.push_back(*new pipes);
@@ -18,13 +31,15 @@ void ofApp::setup(){
             pipes_images[i].push_back(pipeImg);
         }
         
-        ofSetWindowTitle("Flappy Bird");
-        flappy.birdSetup(ofGetWidth()/2, ofGetHeight()/2, ofGetHeight(), ofGetWidth());
+        
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    if(current_state == FINISHED){
+        setup();
+    }
     flappy.gravity(gravity_value);
     for(int i = 0; i < number_of_pipes; i++){
         pipes_vector[i].movePipe(wall_moveSpeed);
@@ -81,8 +96,10 @@ void ofApp::drawPipes(){
             //number_of_pipes--;
             //removeTop();
         }
+        //Collision detection
         if(flappy.isDead(pipes_vector[i].getTopPipe(), pipes_vector[i].getBottomPipe(), pipes_vector[i].getGapSize(), pipes_vector[i].getXCor())){
             wall_moveSpeed = 0;
+            current_state = FINISHED;
         }
         for(int j = 0; j < 2; j++){
             if(j==0){
