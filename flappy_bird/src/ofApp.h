@@ -43,6 +43,9 @@ private:
     std::vector<pipes> pipes_vector;
     std::vector<std::vector<ofImage>> pipes_images;
     
+    void resetVars();
+    void addInitialPole();
+    
 public:
     
     void setup();
@@ -50,8 +53,7 @@ public:
     void draw();
     void keyPressed(int key);
     
-    void resetVars();
-    void addInitialPole();
+
     
     void removeTop();
 

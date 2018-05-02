@@ -7,8 +7,24 @@ void ofApp::resetVars(){
     number_of_pipes == 1;
     current_state = IN_PROGRESS;
     wall_moveSpeed = 5;
-    
-    
+    number_of_pipes = 1;
+    spawn_timer = 0;
+    current_state = PAUSED;
+    flappy.birdSetup(ofGetWidth()/2, ofGetHeight()/2, ofGetHeight(), ofGetWidth());
+}
+
+void ofApp::addInitialPole(){
+    for(int i = 0; i < number_of_pipes; i++){
+        pipes_vector.push_back(*new pipes);
+        pipes_vector[i].pipeSetup(ofGetHeight(), ofGetWidth(), ofGetWidth());
+        
+        pipes_images.push_back(*new std::vector<ofImage>);
+        for(int j = 0; j < 2; j++){
+            ofImage pipeImg;
+            pipeImg.loadImage("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/pipe-green.png");
+            pipes_images[i].push_back(pipeImg);
+        }
+    }
 }
 
 //--------------------------------------------------------------
@@ -26,48 +42,36 @@ void ofApp::setup(){
     //Window Title
     ofSetWindowTitle("Flappy Bird");
     
+    addInitialPole();
     
-    for(int i = 0; i < number_of_pipes; i++){
-        pipes_vector.push_back(*new pipes);
-        pipes_vector[i].pipeSetup(ofGetHeight(), ofGetWidth(), ofGetWidth());
-        
-        pipes_images.push_back(*new std::vector<ofImage>);
-        for(int j = 0; j < 2; j++){
-            ofImage pipeImg;
-            pipeImg.loadImage("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/pipe-green.png");
-            pipes_images[i].push_back(pipeImg);
-        }
-        
-        
-    }
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    if(current_state == FINISHED){
-        //setup();
-    }
-    flappy.gravity(gravity_value);
-    for(int i = 0; i < number_of_pipes; i++){
-        pipes_vector[i].movePipe(wall_moveSpeed);
-    }
-    spawn_timer++;
-    if(spawn_timer == spawn_time){
-        
-        pipes_vector.push_back(*new pipes);
-        pipes_vector[number_of_pipes].pipeSetup(ofGetHeight(), ofGetWidth(), ofGetWidth());
-        
-        std::vector<ofImage> current_image;
-        for(int j = 0; j < 2; j++){
-            ofImage pipeImg;
-            pipeImg.loadImage("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/pipe-green.png");
-            current_image.push_back(pipeImg);
+    if(current_state == IN_PROGRESS){
+        flappy.gravity(gravity_value);
+        for(int i = 0; i < pipes_vector.size(); i++){
+            pipes_vector[i].movePipe(wall_moveSpeed);
         }
-        pipes_images.push_back(current_image);
-        number_of_pipes++;
-        spawn_timer = 0;
-        
+        spawn_timer++;
+        if(spawn_timer == spawn_time){
+            
+            pipes_vector.push_back(*new pipes);
+            pipes_vector[number_of_pipes].pipeSetup(ofGetHeight(), ofGetWidth(), ofGetWidth());
+            
+            std::vector<ofImage> current_image;
+            for(int j = 0; j < 2; j++){
+                ofImage pipeImg;
+                pipeImg.loadImage("/Users/pradeepkumar/Desktop/Spring_2018/CS_126/final-project-pradeepsen99/flappy_bird/src/assets/sprites/pipe-green.png");
+                current_image.push_back(pipeImg);
+            }
+            pipes_images.push_back(current_image);
+            number_of_pipes++;
+            spawn_timer = 0;
+            
+        }
     }
+    
 }
 
 //--------------------------------------------------------------
@@ -95,8 +99,14 @@ void ofApp::keyPressed(int key){
     int upper_key = toupper(key);
     if(upper_key == ' '){
         flappy.fly(speed);
+        if(current_state == PAUSED){
+            current_state = IN_PROGRESS;
+        }
     }else if(upper_key == 'R' && current_state == FINISHED){
-        setup();
+        resetVars();
+        addInitialPole();
+    }else if(upper_key == ' '){
+        
     }
     
 }
